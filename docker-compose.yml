@@ -1,0 +1,59 @@
+version: '2'
+
+services:
+    
+    notebook:
+        container_name: notebook
+        image: jupyter/datascience-notebook
+        volumes:
+            - ../src:/src
+        networks:
+            - bigdata_net
+
+    mongo:
+        container_name: mongo
+        image: mongo:latest
+        ports:
+            - 27017:27017
+        networks:
+            - bigdata_net
+        environment:
+            - MONGO_INITDB_ROOT_USERNAME=admin
+            - MONGO_INITDB_ROOT_PASSWORD=12345
+            - MONGO_INITDB_DATABASE=mongo_db
+        volumes:
+            - /var/lib/mongodb
+            - ./src:/src
+
+    redis:
+        container_name: redis  
+        image: redis:latest
+        networks:
+                - bigdata_net
+        volumes:
+            - ./src:/src
+
+    cassandra:
+        container_name: cassandra
+        image: cassandra:latest
+        ports:
+            - "9042:9042"
+        environment:
+            - "MAX_HEAP_SIZE=256M"
+            - "HEAP_NEWSIZE=128M"
+        restart: always
+        networks:
+            - bigdata_net
+        volumes:
+            - /var/lib/cassandra
+            - ./src:/src
+
+networks:
+  bigdata_net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      - subnet: 172.19.210.0/24
+        gateway: 172.19.210.1
+      
