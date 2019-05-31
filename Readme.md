@@ -1,4 +1,8 @@
-# Iniciar Docker
+# Instalação
+
+* Instalar o [Docker](https://docs.docker.com/install/)
+
+* Instalar o [Docker Compose](https://docs.docker.com/compose/install/)
 
 * Iniciar o docker caso já não esteja iniciado;
 
@@ -18,7 +22,7 @@ A pasta "/src" está montada para cada container e todos os arquivos podem ser s
 
 ## Rede
 
-Todos os containers estão em rede e acessiveis entre si, podendo ser acessado pelo seu nome.
+Todos os containers estão em rede e acessiveis entre si, podendo ser acessados diretamente pelo seu nome.
 
 Ex.: 
 
